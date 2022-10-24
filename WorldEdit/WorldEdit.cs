@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using Microsoft.Xna.Framework;
-using Mono.Data.Sqlite;
+using Microsoft.Data.Sqlite;
 using MySql.Data.MySqlClient;
 using Terraria;
 using Terraria.ID;
@@ -504,23 +504,23 @@ namespace WorldEdit
             });
             #endregion
             #region Database
-            switch (TShock.Config.StorageType.ToLowerInvariant())
+            switch (TShock.Config.Settings.StorageType.ToLowerInvariant())
 			{
 				case "mysql":
-					string[] host = TShock.Config.MySqlHost.Split(':');
+					string[] host = TShock.Config.Settings.MySqlHost.Split(':');
 					Database = new MySqlConnection
 					{
 						ConnectionString = string.Format("Server={0}; Port={1}; Database={2}; Uid={3}; Pwd={4};",
 							host[0],
 							host.Length == 1 ? "3306" : host[1],
-							TShock.Config.MySqlDbName,
-							TShock.Config.MySqlUsername,
-							TShock.Config.MySqlPassword)
+							TShock.Config.Settings.MySqlDbName,
+							TShock.Config.Settings.MySqlUsername,
+							TShock.Config.Settings.MySqlPassword)
 					};
 					break;
 				case "sqlite":
 					string sql = Path.Combine(TShock.SavePath, "worldedit.sqlite");
-					Database = new SqliteConnection(string.Format("uri=file://{0},Version=3", sql));
+					Database = new SqliteConnection(string.Format("Data Source={0}", sql));
 					break;
 			}
 
