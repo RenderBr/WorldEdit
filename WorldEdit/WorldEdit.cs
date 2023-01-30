@@ -575,7 +575,7 @@ namespace WorldEdit
 
 			Main.player[Main.myPlayer] = new Player();
 			var item = new Item();
-			for (var i = 1; i < Main.maxItemTypes; i++)
+			for (var i = 1; i < ItemID.Count; i++)
 			{
 				item.netDefaults(i);
 
